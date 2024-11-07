@@ -5,6 +5,11 @@ export const GET_TABLES_QUERY = gql`
     tables {
       id
       state
+      request {
+        id
+        description
+        price
+      }
     }
   }
 `;

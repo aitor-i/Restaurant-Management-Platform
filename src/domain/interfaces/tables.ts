@@ -1,10 +1,10 @@
 export interface Table {
   id: string;
   state: "Empty" | "Waiting" | "Attended";
-  requests: Request[];
+  requests: OrderRequest[];
 }
 
-export interface Request {
+export interface OrderRequest {
   id: string;
   description: string;
   price: number;

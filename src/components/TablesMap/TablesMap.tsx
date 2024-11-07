@@ -1,9 +1,12 @@
 import useGetTables from "@/hooks/useGetTables/useGetTables";
 import React from "react";
 import TableItem from "./TableItem/TableItem";
+import { useTableSubscription } from "@/hooks/useTablesSubscription/useTablesSubscription";
 
 export default function TablesMap() {
   const { error, loading, tables } = useGetTables();
+  useTableSubscription();
+
   return (
     <div>
       {error && <p>Error: {error.message}</p>}

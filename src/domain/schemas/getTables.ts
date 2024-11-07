@@ -13,3 +13,17 @@ export const GET_TABLES_QUERY = gql`
     }
   }
 `;
+
+export const TABLE_STATUS_SUBSCRIPTION = gql`
+  subscription Subscription {
+    newTableState {
+      id
+      state
+      request {
+        id
+        description
+        price
+      }
+    }
+  }
+`;

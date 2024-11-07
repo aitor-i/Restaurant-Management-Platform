@@ -13,3 +13,7 @@ export interface OrderRequest {
 export interface TablesData {
   tables: Table[];
 }
+
+export interface TableSubscription {
+  newTableState: Table[];
+}

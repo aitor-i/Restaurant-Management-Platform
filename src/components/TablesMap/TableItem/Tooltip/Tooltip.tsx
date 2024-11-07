@@ -24,7 +24,7 @@ export default function Tooltip({ requests }: TooltipProps) {
       ) : (
         <p>No orders</p>
       )}
-      <p className="mt-2 font-bold">Total: ${totalPrice}</p>
+      <p className="mt-2 font-bold">Total: {totalPrice}€</p>
     </div>
   );
 }

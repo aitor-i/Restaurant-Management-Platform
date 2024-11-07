@@ -23,7 +23,7 @@ export default function TableItem({ table }: TableItemProps) {
         : AttenderTable;
 
   const onMouseEnter = () => {
-    if (state === "Attended") {
+    if (state === "Waiting") {
       setIsHovered(true);
     }
   };

@@ -16,3 +16,14 @@ export interface GetCategoriesData {
     categories: Category[];
   };
 }
+
+export interface UpdateCategoryData {
+  updateCategory: {
+    id: string;
+  };
+}
+
+export interface UpdateCategoryVariables {
+  name: string;
+  updateCategoryId: string;
+}

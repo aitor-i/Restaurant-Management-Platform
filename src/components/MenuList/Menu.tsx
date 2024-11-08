@@ -1,6 +1,8 @@
 import useGetMenu from "@/hooks/useGetMenu/useGetMenu";
-import { EditIcon } from "lucide-react";
+import useUpdateCategory from "@/hooks/useUpdateCategory/useUpdateCategory";
+import { EditIcon, PencilIcon } from "lucide-react";
 import React from "react";
+import { CategoryElement } from "./CategoryElement/CategoryElement";
 
 export function MenuList() {
   const { menu } = useGetMenu();
@@ -13,15 +15,15 @@ export function MenuList() {
       <div className="px-4 max-w-xl">
         {menu.map((category) => (
           <div key={category.id}>
-            <h3 className="text-xl flex justify-between py-2 font-bold tracking-tight text-customPalette-sageGreen sm:text-2xl">
-              {category.name}
-              <EditIcon className="cursor-pointer" />
-            </h3>
-            <ul className="list-disc list-inside ">
+            <CategoryElement category={category} key={category.id} />
+            <ul className="list-disc list-inside text-slate-700">
               {category.items.map((item) => (
                 <li className="flex justify-between px-6" key={item.id}>
                   <p>{item.description}</p>
-                  <p>{item.price}€</p>
+                  <span className="flex gap-2 items-center ">
+                    <p>{item.price}€</p>
+                    <EditIcon className="cursor-pointer text-sm" />
+                  </span>
                 </li>
               ))}
             </ul>

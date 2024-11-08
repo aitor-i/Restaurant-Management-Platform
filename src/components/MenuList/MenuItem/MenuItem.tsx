@@ -6,6 +6,7 @@ import { Input } from "@/components/Input/Input";
 import useUpdateMenuItem from "@/hooks/useUpdateMenuItem/useUpdateMenuItem";
 import { useToast } from "@/hooks/use-toast";
 import useGetMenu from "@/hooks/useGetMenu/useGetMenu";
+import useDeleteMenuItem from "@/hooks/useDeleteMenuItem/useDeleteMenuItem";
 
 interface MenuItmsProps {
   item: MenuItemInterface;
@@ -22,6 +23,7 @@ export function MenuItem({ item, categoryId }: MenuItmsProps) {
   const [editedItem, setEditedItem] = React.useState(item.description);
   const [editedPrice, setEditedPrice] = React.useState(item.price);
   const { updateMenuItem } = useUpdateMenuItem();
+  const { deleteMenuItem } = useDeleteMenuItem();
   const { toast } = useToast();
   const { refetch: refetchMenu } = useGetMenu();
 
@@ -51,7 +53,15 @@ export function MenuItem({ item, categoryId }: MenuItmsProps) {
     setIsEditing(false);
   };
 
-  const onDeleteItem = () => {};
+  const onDeleteItem = async () => {
+    await deleteMenuItem(item.id);
+    refetchMenu();
+    setIsEditing(false);
+    toast({
+      title: "Item deleted",
+      variant: "destructive",
+    });
+  };
 
   return (
     <>

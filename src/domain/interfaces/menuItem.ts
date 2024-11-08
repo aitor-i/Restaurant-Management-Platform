@@ -32,3 +32,13 @@ export interface UpdateMenuItemVariables {
   categoryId: string;
   updateMenuItemId: string;
 }
+
+export interface DeleteMenuItemData {
+  deleteMenuItem: {
+    id: string;
+  };
+}
+
+export interface DeleteMenuItemVariables {
+  deleteMenuItemId: string;
+}

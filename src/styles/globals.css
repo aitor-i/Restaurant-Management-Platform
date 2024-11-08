@@ -16,3 +16,9 @@ body {
   min-height: 100vh;
   background-attachment: fixed; /* Keeps the gradient fixed on scroll */
 }
+
+@layer base {
+  :root {
+    --radius:0.5rem;
+  }
+}

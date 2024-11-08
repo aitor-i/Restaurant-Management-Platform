@@ -3,19 +3,26 @@ import React, { useRef } from "react";
 import { Button } from "@/components/Button/Button";
 import { Input } from "@/components/Input/Input";
 import { useCreateCategory } from "@/hooks/useCreateCategory/useCreateCategory";
+import { useToast } from "@/hooks/use-toast";
 
 export function CategoryForm() {
   const { error, createCategory, loading } = useCreateCategory();
   const categoryFormRef = useRef<HTMLFormElement>(null);
+  const { toast } = useToast();
+
   const onSubmitCategory = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const formData = new FormData(event.currentTarget);
     const category = formData.get("category") as string;
+    if (!category) return;
     const response = await createCategory(category);
 
     if (!response.errors) {
       formData.delete("category");
       categoryFormRef.current?.reset();
+      toast({
+        title: "Category created",
+      });
     }
   };
 

@@ -27,23 +27,36 @@ export function CategoryForm() {
   };
 
   return (
-    <form
-      ref={categoryFormRef}
-      className="flex flex-col gap-4"
-      onSubmit={onSubmitCategory}
-    >
-      <label htmlFor="category" className="text-2xl">
-        Category
-      </label>
-      <Input id="category" name="category" type="text" placeholder="Category" />
-      {error && <p className="text-red-500 text-sm">Error: {error.message}</p>}
-      <Button
-        disabled={loading}
-        className="text-customPalette-ivory font-bold"
-        type="submit"
+    <div>
+      <h3 className="text-xl font-bold tracking-tight text-customPalette-sageGreen sm:text-2xl">
+        Add Category
+      </h3>
+
+      <form
+        ref={categoryFormRef}
+        className="flex flex-col gap-4"
+        onSubmit={onSubmitCategory}
       >
-        {loading ? "Loading..." : "Add Category"}
-      </Button>
-    </form>
+        <label htmlFor="category" className="text-xl">
+          Category
+        </label>
+        <Input
+          id="category"
+          name="category"
+          type="text"
+          placeholder="Category"
+        />
+        {error && (
+          <p className="text-red-500 text-sm">Error: {error.message}</p>
+        )}
+        <Button
+          disabled={loading}
+          className="text-customPalette-ivory font-bold"
+          type="submit"
+        >
+          {loading ? "Loading..." : "Add Category"}
+        </Button>
+      </form>
+    </div>
   );
 }

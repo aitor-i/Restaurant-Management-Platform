@@ -19,3 +19,16 @@ export interface CreateMenuItemVariables {
   price: number;
   categoryId: string;
 }
+
+export interface UpdateMenuItemData {
+  updateMenuItem: {
+    id: string;
+  };
+}
+
+export interface UpdateMenuItemVariables {
+  description: string;
+  price: number;
+  categoryId: string;
+  updateMenuItemId: string;
+}

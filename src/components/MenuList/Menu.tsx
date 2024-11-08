@@ -1,8 +1,7 @@
 import useGetMenu from "@/hooks/useGetMenu/useGetMenu";
-import useUpdateCategory from "@/hooks/useUpdateCategory/useUpdateCategory";
-import { EditIcon, PencilIcon } from "lucide-react";
 import React from "react";
 import { CategoryElement } from "./CategoryElement/CategoryElement";
+import { MenuItem } from "./MenuItem/MenuItem";
 
 export function MenuList() {
   const { menu } = useGetMenu();
@@ -18,13 +17,7 @@ export function MenuList() {
             <CategoryElement category={category} key={category.id} />
             <ul className="list-disc list-inside text-slate-700">
               {category.items.map((item) => (
-                <li className="flex justify-between px-6" key={item.id}>
-                  <p>{item.description}</p>
-                  <span className="flex gap-2 items-center ">
-                    <p>{item.price}€</p>
-                    <EditIcon className="cursor-pointer text-sm" />
-                  </span>
-                </li>
+                <MenuItem categoryId={category.id} key={item.id} item={item} />
               ))}
             </ul>
           </div>

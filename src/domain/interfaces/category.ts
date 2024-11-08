@@ -27,3 +27,13 @@ export interface UpdateCategoryVariables {
   name: string;
   updateCategoryId: string;
 }
+
+export interface DeleteCategoryData {
+  deleteCategory: {
+    id: string;
+  };
+}
+
+export interface DeleteCategoryVariables {
+  deleteCategoryId: string;
+}

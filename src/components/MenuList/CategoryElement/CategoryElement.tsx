@@ -6,6 +6,8 @@ import { EditIcon, SaveIcon, Trash2Icon, XIcon } from "lucide-react";
 import { Button } from "@/components/Button/Button";
 import useGetCategories from "@/hooks/useGetCategories/useGetCategories";
 import { useToast } from "@/hooks/use-toast";
+import useDeleteCategory from "@/hooks/useDeleteCategory/useDeleteCategory";
+import useGetMenu from "@/hooks/useGetMenu/useGetMenu";
 
 interface CategoryProp {
   category: Category;
@@ -14,8 +16,10 @@ interface CategoryProp {
 export function CategoryElement({ category }: CategoryProp) {
   const [isEditing, setIsEditing] = useState(false);
   const [editedCategoryName, setEditedCategoryName] = useState(category.name);
+  const { deleteCategory } = useDeleteCategory();
   const { updateCategory } = useUpdateCategory();
   const { refetch: refetchCategories } = useGetCategories();
+  const { refetch: refetchMenu } = useGetMenu();
   const { toast } = useToast();
 
   const onChangeCategoryName = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -40,6 +44,16 @@ export function CategoryElement({ category }: CategoryProp) {
     setIsEditing(false);
   };
 
+  const onDeleteCategory = async () => {
+    await deleteCategory(category.id);
+    refetchCategories();
+    refetchMenu();
+    toast({
+      title: "Category deleted",
+      variant: "destructive",
+    });
+  };
+
   return (
     <>
       {isEditing ? (
@@ -57,7 +71,7 @@ export function CategoryElement({ category }: CategoryProp) {
             <Button variant="secondary" onClick={onCancelEditCategory}>
               <XIcon />
             </Button>
-            <Button variant="destructive">
+            <Button variant="destructive" onClick={onDeleteCategory}>
               <Trash2Icon />
             </Button>
           </div>

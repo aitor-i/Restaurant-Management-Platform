@@ -1,58 +1,22 @@
-import React, { useState } from "react";
-
 import { Category } from "@/domain/interfaces/category";
-import useUpdateCategory from "@/hooks/useUpdateCategory/useUpdateCategory";
 import { EditIcon, SaveIcon, Trash2Icon, XIcon } from "lucide-react";
 import { Button } from "@/components/Button/Button";
-import useGetCategories from "@/hooks/useGetCategories/useGetCategories";
-import { useToast } from "@/hooks/use-toast";
-import useDeleteCategory from "@/hooks/useDeleteCategory/useDeleteCategory";
-import useGetMenu from "@/hooks/useGetMenu/useGetMenu";
+import { useCategoryElement } from "./useCategoryElement";
 
 interface CategoryProp {
   category: Category;
 }
 
 export function CategoryElement({ category }: CategoryProp) {
-  const [isEditing, setIsEditing] = useState(false);
-  const [editedCategoryName, setEditedCategoryName] = useState(category.name);
-  const { deleteCategory } = useDeleteCategory();
-  const { updateCategory } = useUpdateCategory();
-  const { refetch: refetchCategories } = useGetCategories();
-  const { refetch: refetchMenu } = useGetMenu();
-  const { toast } = useToast();
-
-  const onChangeCategoryName = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setEditedCategoryName(e.target.value);
-  };
-
-  const handleUpdateCategory = async () => {
-    await updateCategory(editedCategoryName, category.id);
-    refetchCategories();
-    toast({
-      title: "Category updated",
-    });
-
-    setIsEditing(false);
-  };
-
-  const onClickEditCategory = () => {
-    setIsEditing(true);
-  };
-
-  const onCancelEditCategory = () => {
-    setIsEditing(false);
-  };
-
-  const onDeleteCategory = async () => {
-    await deleteCategory(category.id);
-    refetchCategories();
-    refetchMenu();
-    toast({
-      title: "Category deleted",
-      variant: "destructive",
-    });
-  };
+  const {
+    isEditing,
+    editedCategoryName,
+    onChangeCategoryName,
+    onDeleteCategory,
+    onClickEditCategory,
+    handleUpdateCategory,
+    onCancelEditCategory,
+  } = useCategoryElement({ category: category });
 
   return (
     <>

@@ -4,14 +4,13 @@ import useCreateMenuItem from "@/hooks/useCreateMenuItem/useCreateMenuItem";
 import { Input } from "@/components/Input/Input";
 import { Select } from "@/components/Select/Select";
 import { useRef } from "react";
+import useGetCategories from "@/hooks/useGetCategories/useGetCategories";
 
 export function MenuItemForm() {
   const { data, error, loading, createMenuItem } = useCreateMenuItem();
+  const { categories } = useGetCategories();
   const formRef = useRef<HTMLFormElement>(null);
   const { toast } = useToast();
-
-  // TODO - get categories from backend
-  const categories = [{ id: 1, name: "Pizza" }];
 
   const onSubmitCategory = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();

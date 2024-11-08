@@ -4,9 +4,11 @@ import { Button } from "@/components/Button/Button";
 import { Input } from "@/components/Input/Input";
 import { useCreateCategory } from "@/hooks/useCreateCategory/useCreateCategory";
 import { useToast } from "@/hooks/use-toast";
+import useGetCategories from "@/hooks/useGetCategories/useGetCategories";
 
 export function CategoryForm() {
   const { error, createCategory, loading } = useCreateCategory();
+  const { refetch } = useGetCategories();
   const categoryFormRef = useRef<HTMLFormElement>(null);
   const { toast } = useToast();
 
@@ -20,6 +22,7 @@ export function CategoryForm() {
     if (!response.errors) {
       formData.delete("category");
       categoryFormRef.current?.reset();
+      refetch();
       toast({
         title: "Category created",
       });

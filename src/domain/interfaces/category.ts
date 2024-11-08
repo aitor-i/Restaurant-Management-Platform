@@ -10,3 +10,9 @@ export interface CreateCategoryData {
 export interface CreateCategoryVariables {
   name: string;
 }
+
+export interface GetCategoriesData {
+  menu: {
+    categories: Category[];
+  };
+}

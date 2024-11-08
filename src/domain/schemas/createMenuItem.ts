@@ -14,10 +14,6 @@ export const CREATE_MENU_ITEM_MUTATION = gql`
       id
       description
       price
-      category {
-        id
-        name
-      }
     }
   }
 `;

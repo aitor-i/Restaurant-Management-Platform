@@ -5,9 +5,11 @@ import { Input } from "@/components/Input/Input";
 import { Select } from "@/components/Select/Select";
 import { useRef } from "react";
 import useGetCategories from "@/hooks/useGetCategories/useGetCategories";
+import useGetMenu from "@/hooks/useGetMenu/useGetMenu";
 
 export function MenuItemForm() {
   const { data, error, loading, createMenuItem } = useCreateMenuItem();
+  const { refetch } = useGetMenu();
   const { categories } = useGetCategories();
   const formRef = useRef<HTMLFormElement>(null);
   const { toast } = useToast();
@@ -28,6 +30,8 @@ export function MenuItemForm() {
       formData.delete("description");
       formData.delete("price");
       formRef.current?.reset();
+
+      refetch();
       toast({
         title: "Menu Item created",
       });

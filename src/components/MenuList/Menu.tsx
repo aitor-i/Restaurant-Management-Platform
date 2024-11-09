@@ -1,7 +1,7 @@
 import useGetMenu from "@/hooks/useGetMenu/useGetMenu";
-import React from "react";
 import { CategoryElement } from "./CategoryElement/CategoryElement";
 import { MenuItem } from "./MenuItem/MenuItem";
+import { AddCategory } from "./AddCategory/AddCategory";
 
 export function MenuList() {
   const { menu } = useGetMenu();
@@ -22,6 +22,7 @@ export function MenuList() {
             </ul>
           </div>
         ))}
+        <AddCategory />
       </div>
     </div>
   );

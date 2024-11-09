@@ -1,40 +1,146 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/pages/api-reference/create-next-app).
+
+# Restaurant Management Platform
+
+This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/pages/api-reference/create-next-app). It provides an intuitive platform for managing a restaurant's tables, menu items, and categories, along with real-time updates.
+
+## Features
+
+- **Table Management**: View and manage restaurant tables in real-time.
+- **Menu Management**: Create, update, and delete menu items and categories.
+- **GraphQL Integration**: Uses GraphQL for efficient data fetching with Apollo Client.
+- **Custom Hooks**: Includes custom React hooks for managing GraphQL queries and mutations.
+
+## Prerequisites
+
+- **Node.js**: Ensure you have Node.js installed (v14 or later is recommended).
+- **Docker** (optional): For running backend services and database locally.
 
 ## Getting Started
 
-First, run the development server:
+### Installation
+
+1. Clone the repository:
+
+   ```bash
+   git clone https://github.com/your-username/restaurant-management-platform.git
+   cd restaurant-management-platform
+   ```
+
+2. Install dependencies:
+
+   ```bash
+   npm install
+   # or
+   yarn install
+   ```
+
+3. Set up environment variables by creating a `.env.local` file in the root directory. Add your environment-specific variables, such as:
+
+   ```plaintext
+   NEXT_PUBLIC_GRAPHQL_API_URL=http://localhost:4000/graphql
+   ```
+
+### Running the Development Server
+
+To start the development server, run:
 
 ```bash
 npm run dev
 # or
 yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Then, open [http://localhost:3000](http://localhost:3000) in your browser to see the application in action.
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
+### Running the Backend Services
 
-[API routes](https://nextjs.org/docs/pages/building-your-application/routing/api-routes) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
+1. **Start Docker**: Ensure Docker is running.
+2. **Run the Docker Compose file**:
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/pages/building-your-application/routing/api-routes) instead of React pages.
+   ```bash
+   docker-compose up
+   ```
 
-This project uses [`next/font`](https://nextjs.org/docs/pages/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+   This command will set up the backend services, including the database and API server on [http://localhost:4000](http://localhost:4000).
 
-## Learn More
+## GraphQL Setup
 
-To learn more about Next.js, take a look at the following resources:
+The application uses Apollo Client to handle GraphQL queries and mutations. Key queries and mutations include:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn-pages-router) - an interactive Next.js tutorial.
+- **Queries**:
+  - `GET_MENU_QUERY`: Fetches all menu categories and items.
+  - `GET_CATEGORIES_QUERY`: Fetches all categories.
+- **Mutations**:
+  - `CREATE_CATEGORY_MUTATION`: Creates a new category.
+  - `UPDATE_CATEGORY_MUTATION`: Updates an existing category.
+  - `DELETE_CATEGORY_MUTATION`: Deletes a category.
+  - `CREATE_MENU_ITEM_MUTATION`: Creates a new menu item.
+  - `UPDATE_MENU_ITEM_MUTATION`: Updates an existing menu item.
+  - `DELETE_MENU_ITEM_MUTATION`: Deletes a menu item.
+- **Subscriptions**:
+  - `TABLE_STATUS_SUBSCRIPTION`: Subscribes to real-time table status updates.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Custom Hooks
 
-## Deploy on Vercel
+Custom hooks abstract and simplify GraphQL queries and mutations:
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- `useGetCategories`: Fetches categories data.
+- `useGetMenu`: Fetches the full menu including categories and items.
+- `useCreateCategory`: Executes the category creation mutation.
+- `useUpdateCategory`: Updates an existing category.
+- `useDeleteCategory`: Deletes a category.
+- `useCreateMenuItem`: Creates a new menu item.
+- `useUpdateMenuItem`: Updates an existing menu item.
+- `useDeleteMenuItem`: Deletes a menu item.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/pages/building-your-application/deploying) for more details.
+## File Structure
+
+```
+├── src/
+│   ├── components/       # Reusable UI components
+│   ├── domain/
+│   │   ├── interfaces/   # TypeScript interfaces for GraphQL data types
+│   │   └── schemas/      # GraphQL schemas for queries and mutations
+│   ├── hooks/            # Custom hooks for handling GraphQL queries and mutations
+│   ├── pages/            # Next.js pages
+│   └── styles/           # Global and component-specific styles
+└── public/               # Public assets
+```
+
+## Scripts
+
+- `dev`: Runs the development server.
+- `build`: Builds the application for production.
+- `start`: Starts the application in production mode.
+- `lint`: Lints the codebase.
+- `docker-compose up`: Starts backend services with Docker.
+
+## API Routes
+
+- **Table Management**: `/api/tables` – Provides table status and allows real-time updates.
+- **Menu Management**: `/api/menu` – Provides and updates menu categories and items.
+
+## Deployment
+
+The application is ready for deployment with [Vercel](https://vercel.com) or any other Next.js-supported platform.
+
+### Steps to Deploy on Vercel
+
+1. Push your code to a GitHub repository.
+2. Go to [Vercel's New Project page](https://vercel.com/new) and import your repository.
+3. Set up environment variables in Vercel to match your `.env.local` file.
+4. Click "Deploy" to build and deploy your application.
+
+For more details on Next.js deployment, check out the [Next.js deployment documentation](https://nextjs.org/docs/pages/building-your-application/deploying).
+
+## Resources
+
+- [Next.js Documentation](https://nextjs.org/docs)
+- [Apollo Client Documentation](https://www.apollographql.com/docs/react/)
+- [GraphQL Documentation](https://graphql.org/learn/)
+- [Vercel Platform](https://vercel.com/docs)
+
+## License
+
+This project is licensed under the MIT License.
+

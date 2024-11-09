@@ -2,9 +2,21 @@ import useGetMenu from "@/hooks/useGetMenu/useGetMenu";
 import { CategoryElement } from "./CategoryElement/CategoryElement";
 import { MenuItem } from "./MenuItem/MenuItem";
 import { AddCategory } from "./AddCategory/AddCategory";
+import { useState } from "react";
+import { AddMenuItem } from "./AddMenuItem/AddMenuItem";
 
 export function MenuList() {
   const { menu } = useGetMenu();
+
+  const [addingId, setAddingId] = useState("");
+
+  const onClickAdd = (id: string) => {
+    setAddingId(id);
+  };
+
+  const resetAddingId = () => {
+    setAddingId("");
+  };
 
   return (
     <div>
@@ -14,8 +26,18 @@ export function MenuList() {
       <div className="px-4 max-w-xl">
         {menu.map((category) => (
           <div key={category.id}>
-            <CategoryElement category={category} key={category.id} />
+            <CategoryElement
+              onAddMenuItem={onClickAdd}
+              category={category}
+              key={category.id}
+            />
             <ul className="list-disc list-inside text-slate-700">
+              {addingId === category.id && (
+                <AddMenuItem
+                  categoryId={category.id}
+                  onSuccess={resetAddingId}
+                />
+              )}
               {category.items.map((item) => (
                 <MenuItem categoryId={category.id} key={item.id} item={item} />
               ))}

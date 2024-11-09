@@ -1,13 +1,14 @@
 import { Category } from "@/domain/interfaces/category";
-import { EditIcon, SaveIcon, Trash2Icon, XIcon } from "lucide-react";
+import { EditIcon, PlusIcon, SaveIcon, Trash2Icon, XIcon } from "lucide-react";
 import { Button } from "@/components/Button/Button";
 import { useCategoryElement } from "./useCategoryElement";
 
 interface CategoryProp {
   category: Category;
+  onAddMenuItem: (id: string) => void;
 }
 
-export function CategoryElement({ category }: CategoryProp) {
+export function CategoryElement({ category, onAddMenuItem }: CategoryProp) {
   const {
     isEditing,
     editedCategoryName,
@@ -17,6 +18,10 @@ export function CategoryElement({ category }: CategoryProp) {
     handleUpdateCategory,
     onCancelEditCategory,
   } = useCategoryElement({ category: category });
+
+  const onClickAddMenuItem = () => {
+    onAddMenuItem(category.id);
+  };
 
   return (
     <>
@@ -43,10 +48,16 @@ export function CategoryElement({ category }: CategoryProp) {
       ) : (
         <h3 className="text-xl flex justify-between py-2 font-bold tracking-tight text-customPalette-sageGreen sm:text-2xl">
           {category.name}
-          <EditIcon
-            onClick={onClickEditCategory}
-            className="cursor-pointer text-sm"
-          />
+          <span className="flex gap-2 items-center">
+            <EditIcon
+              onClick={onClickEditCategory}
+              className="cursor-pointer text-sm"
+            />
+            <PlusIcon
+              onClick={onClickAddMenuItem}
+              className="cursor-pointer  rounded-md border-customPalette-sageGreen text-customPalette-ivory bg-customPalette-sageGreen"
+            />
+          </span>
         </h3>
       )}
     </>

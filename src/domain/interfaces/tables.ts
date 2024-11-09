@@ -1,7 +1,7 @@
 export interface Table {
   id: string;
   state: "Empty" | "Waiting" | "Attended";
-  requests: OrderRequest[];
+  request: OrderRequest[];
 }
 
 export interface OrderRequest {

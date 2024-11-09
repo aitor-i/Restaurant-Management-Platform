@@ -7,6 +7,7 @@ interface TooltipProps {
 }
 
 export default function Tooltip({ requests }: TooltipProps) {
+  console.log(requests);
   const totalPrice =
     requests?.reduce((sum, order) => sum + order.price, 0) ?? 0;
 

@@ -13,7 +13,7 @@ interface TableItemProps {
 
 export default function TableItem({ table }: TableItemProps) {
   const [isHovered, setIsHovered] = useState(false);
-  const { id, state, requests } = table;
+  const { id, state, request } = table;
 
   const image =
     state === "Empty"
@@ -41,7 +41,7 @@ export default function TableItem({ table }: TableItemProps) {
       <img src={image.src} alt={`table-${state}`} className="w-full h-full" />
       <p className="text-center text-customPalette-ivory">{id}</p>
 
-      {isHovered && <Tooltip requests={requests} />}
+      {isHovered && <Tooltip requests={request} />}
     </div>
   );
 }

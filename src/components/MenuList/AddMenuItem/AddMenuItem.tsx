@@ -50,6 +50,7 @@ export function AddMenuItem({ categoryId, onSuccess }: MenuItmsProps) {
         type="text"
         placeholder="Description"
         className="w-full rounded-md border border-gray-300 bg-white px-3 py-2 text-sm placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent disabled:cursor-not-allowed disabled:opacity-50"
+        maxLength={30}
       />
       <Input
         id="price"
@@ -57,6 +58,8 @@ export function AddMenuItem({ categoryId, onSuccess }: MenuItmsProps) {
         type="number"
         placeholder="Price"
         className="w-20"
+        min={0}
+        max={1000}
       />
 
       <div className="flex gap-1">

@@ -68,12 +68,20 @@ export function MenuItemForm() {
           name="description"
           type="text"
           placeholder="Description"
+          maxLength={30}
         />
 
         <label htmlFor="price" className="text-xl">
           Price
         </label>
-        <Input id="price" name="price" type="number" placeholder="Price" />
+        <Input
+          id="price"
+          min={0}
+          max={1000}
+          name="price"
+          type="number"
+          placeholder="Price"
+        />
 
         {error && (
           <p className="text-red-500 text-sm">Error: {error.message}</p>

@@ -51,6 +51,7 @@ export function CategoryForm() {
           id="category"
           name="category"
           type="text"
+          maxLength={30}
           placeholder="Category"
         />
         {error && (

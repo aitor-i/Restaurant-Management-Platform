@@ -57,6 +57,7 @@ export function AddCategory() {
             name="category"
             type="text"
             placeholder="Category"
+            maxLength={30}
           />
           <div className="flex gap-1">
             <Button
